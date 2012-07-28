@@ -1,21 +1,15 @@
 package com.faresgames.miniwar;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import org.apache.http.util.ByteArrayBuffer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -89,8 +83,6 @@ public class MiniwarActivity extends ActionItems {
         		JSONObject fbJson_data = Util.parseJson(facebook.request("me"));
 				
 				final String uid = Secure.getString(this.getContentResolver(),Secure.ANDROID_ID);
-				//JSONArray fbArray = new JSONArray(fbJson);
-				//JSONObject fbJson_data = fbArray.getJSONObject(0);
 				TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         	 	
 				int id = fbJson_data.getInt("id");

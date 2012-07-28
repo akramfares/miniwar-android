@@ -799,6 +799,10 @@ containing a value of this type.
         public static final int ic_title_share_default=0x7f020062;
     }
     public static final class id {
+        public static final int MessageTitle=0x7f04002f;
+        public static final int MineHorizontal=0x7f040027;
+        public static final int MineVerticalDroit=0x7f04002c;
+        public static final int MineVerticalGauche=0x7f040028;
         public static final int abs__action_bar=0x7f040022;
         public static final int abs__action_bar_container=0x7f040021;
         public static final int abs__action_bar_subtitle=0x7f040011;
@@ -830,13 +834,22 @@ containing a value of this type.
         public static final int abs__up=0x7f04000b;
         public static final int disableHome=0x7f040009;
         public static final int homeAsUp=0x7f040006;
+        public static final int imageView1=0x7f040029;
         public static final int listMode=0x7f040002;
         public static final int normal=0x7f040001;
+        public static final int scrollView1=0x7f040031;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
         public static final int tabMode=0x7f040003;
-        public static final int text=0x7f040027;
+        public static final int text=0x7f040034;
+        public static final int textView1=0x7f040030;
+        public static final int textView2=0x7f04002a;
+        public static final int textView3=0x7f04002d;
+        public static final int textView4=0x7f04002e;
+        public static final int textView5=0x7f04002b;
+        public static final int textView6=0x7f040032;
+        public static final int textView7=0x7f040033;
         public static final int useLogo=0x7f040004;
         public static final int wrap_content=0x7f040000;
     }
