@@ -28,7 +28,7 @@ public class ActionItems extends SherlockActivity {
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Used to put dark icons on light action bar
-        boolean isLight = true;
+       // boolean isLight = true;
         
         menu.add("Save")
             //.setIcon(isLight ? R.drawable.ic_compose_inverse : R.drawable.ic_compose)
@@ -49,7 +49,7 @@ public class ActionItems extends SherlockActivity {
         setTheme(R.style.Theme_Sherlock_Light_DarkActionBar); //Used for theme switching in samples
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        //setContent((TextView)findViewById(R.id.text));
+        setContent((TextView)findViewById(R.id.MineLevel));
     }
 
     protected void setContent(TextView view) {

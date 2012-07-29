@@ -1,11 +1,6 @@
 package com.faresgames.miniwar;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -21,7 +16,6 @@ import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
@@ -32,11 +26,10 @@ import com.facebook.android.Util;
 public class MiniwarActivity extends ActionItems {
 	Facebook facebook = new Facebook("121460807998402");
     private SharedPreferences mPrefs;
-    String player_data = null;
 
 	@Override
 	public void setContent(TextView view) {
-		player_data = readFile("mw_player");
+		Player player = new Player(this.getApplicationContext());
         
         /*
          * Get existing access_token if any
@@ -78,7 +71,7 @@ public class MiniwarActivity extends ActionItems {
             
         }
         
-        if(facebook.isSessionValid()){// && player_data.equals("0")){
+        if(facebook.isSessionValid() && !player.exists()){
         	try {
 				// We retrieve information from facebook and other
         		JSONObject fbJson_data = Util.parseJson(facebook.request("me"));
@@ -94,25 +87,22 @@ public class MiniwarActivity extends ActionItems {
 				Date date= new Date();
 				String timestamp = new Timestamp(date.getTime()).toString();
 				
-				// We create the JSON object of the player
-				JSONObject player_data = new JSONObject();
-				player_data.put("id", id);
-				player_data.put("username", username);
-				player_data.put("access_token", access);
-				player_data.put("email", email);
-				player_data.put("country", country);
-				player_data.put("uid", uid);
-				player_data.put("timestamp", timestamp);
-				player_data.put("gold", 1000);
-				player_data.put("xp", 0);
-				player_data.put("mine", 1);
-				player_data.put("soldier", 0);
-				player_data.put("knight", 0);
-				player_data.put("archer", 0);
-				player_data.put("hero", 0);
-				
-				// We create the player file
-				writeFile("mw_player", player_data.toString());
+				// We create the player
+				player.setId(id);
+				player.setUsername(username);
+				player.setAccess(access);
+				player.setEmail(email);
+				player.setCountry(country);
+				player.setUid(uid);
+				player.setTimestamp(timestamp);
+				player.setGold(1000);
+				player.setXp(0);
+				player.setMine(1);
+				player.setSoldier(0);
+				player.setKnight(0);
+				player.setArcher(0);
+				player.setHero(0);
+				player.register();
 				
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
@@ -122,15 +112,12 @@ public class MiniwarActivity extends ActionItems {
 				Log.e("Erreur JSON : ",e.toString());
 			}
         }
-        if(!player_data.equals("0")){
-        	//view.setText(player_data);
-        	
-        	try {
-        		JSONObject data = Util.parseJson(player_data);
-				super.setTitle("Welcome, "+ data.getString("username"));
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
+        
+        if(player.exists()){
+				super.setTitle("Welcome, "+ player.getUsername());
+				TextView MineLevel = (TextView)findViewById(R.id.MineLevel);
+				MineLevel.setText("Level "+player.getMine());
+				
         }
     }
 
@@ -140,38 +127,5 @@ public class MiniwarActivity extends ActionItems {
 
         facebook.authorizeCallback(requestCode, resultCode, data);
     }
-    
-    private void writeFile(String file, String text){
-		FileOutputStream fos;
-		try {
-			fos = this.openFileOutput(file, Context.MODE_PRIVATE);
-			fos.write(text.getBytes());
-        	fos.close();
-		} catch (FileNotFoundException e) {
-			Toast.makeText(this, "ERROR: can't open file", Toast.LENGTH_SHORT).show();
-		} catch (IOException e) {
-			Toast.makeText(this, "ERROR: can't write file", Toast.LENGTH_SHORT).show();
-		}	
-	}
-    
-    private String readFile(String file) {
-		StringBuilder json = new StringBuilder();
-		try {
-			FileInputStream fis = this.openFileInput(file);
-			BufferedReader r = new BufferedReader(new InputStreamReader(fis));
-			String line;
-			while ((line = r.readLine()) != null) {
-			    json.append(line);
-			}
-			fis.close();
-			return json.toString();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return "0";
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "0";
-		}
-	}
 
 }
