@@ -123,7 +123,7 @@ public class MiniwarActivity extends ActionItems {
 			}
         }
         if(!player_data.equals("0")){
-        	view.setText(player_data);
+        	//view.setText(player_data);
         	
         	try {
         		JSONObject data = Util.parseJson(player_data);

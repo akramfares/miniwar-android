@@ -48,8 +48,8 @@ public class ActionItems extends SherlockActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_Sherlock_Light_DarkActionBar); //Used for theme switching in samples
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.text);
-        setContent((TextView)findViewById(R.id.text));
+        setContentView(R.layout.main);
+        //setContent((TextView)findViewById(R.id.text));
     }
 
     protected void setContent(TextView view) {
