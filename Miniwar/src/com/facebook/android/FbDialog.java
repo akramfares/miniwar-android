@@ -35,8 +35,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.facebook.android.Facebook.DialogListener;
 import com.faresgames.miniwar.R;
+import com.facebook.android.Facebook.DialogListener;
 
 public class FbDialog extends Dialog {
 
@@ -89,8 +89,8 @@ public class FbDialog extends Dialog {
         /* Finally add the 'x' image to the mContent layout and
          * add mContent to the Dialog view
          */
-        mContent.addView(mCrossImage, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        addContentView(mContent, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+        mContent.addView(mCrossImage, new LayoutParams(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
+        addContentView(mContent, new LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT, android.view.ViewGroup.LayoutParams.FILL_PARENT));
     }
     
     private void createCrossImage() {

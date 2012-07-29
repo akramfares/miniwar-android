@@ -24,7 +24,8 @@ import com.actionbarsherlock.view.MenuItem;
 
 
 public class ActionItems extends SherlockActivity {
-    @Override
+
+	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Used to put dark icons on light action bar
         boolean isLight = true;
