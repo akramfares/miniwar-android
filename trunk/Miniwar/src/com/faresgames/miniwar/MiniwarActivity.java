@@ -65,13 +65,14 @@ public class MiniwarActivity extends ActionItems {
                     editor.commit();
                 }
     
-                @Override
+				@Override
                 public void onFacebookError(FacebookError error) {}
     
-                @Override
+				@Override
                 public void onError(DialogError e) {}
     
-                @Override
+                
+				@Override
                 public void onCancel() {}
             });
             
