@@ -27,25 +27,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/mine" />
-
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:orientation="vertical" >
-
+
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mine"
+                        android:text="Gold Mine"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
-
+
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/MineProduction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="400 gold/h"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="12dp" />
 
                 </LinearLayout>
 
@@ -59,20 +61,20 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:orientation="vertical" >
-
+
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/MineLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
                 android:text="Level 1"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/textView4"
+
+            <Button
+                android:id="@+id/MineUpgrade"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upgrade"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:layout_height="34dp"
+                android:text="Upgrade" />
 
         </LinearLayout>
     </RelativeLayout>
