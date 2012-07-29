@@ -797,6 +797,7 @@ containing a value of this type.
         public static final int ic_search=0x7f020060;
         public static final int ic_search_inverse=0x7f020061;
         public static final int ic_title_share_default=0x7f020062;
+        public static final int mine=0x7f020063;
     }
     public static final class id {
         public static final int MessageTitle=0x7f04002f;
