@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +24,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:orientation="vertical" >
-
+
+
+
+
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,7 +74,8 @@
                 android:layout_centerHorizontal="false"
                 android:layout_centerVertical="false"
                 android:orientation="vertical" >
-
+
+
                 <TextView
                     android:id="@+id/MineLevel"
                     android:layout_width="wrap_content"
@@ -86,12 +94,15 @@
         </RelativeLayout>
 
     </LinearLayout>
-
+
+
     <RelativeLayout
         android:id="@+id/MessageTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
+
+
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
