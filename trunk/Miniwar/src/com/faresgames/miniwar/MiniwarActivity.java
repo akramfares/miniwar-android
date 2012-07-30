@@ -128,7 +128,7 @@ public class MiniwarActivity extends ActionItems {
 		}
 
 		if (Player.isLoaded()) {
-			super.setTitle("Welcome, " + Player.getUsername());
+			super.setTitle("Welcome! " + Player.getUsername());
 			TextView MineLevel = (TextView) findViewById(R.id.MineLevel);
 			MineLevel.setText("Level " + Player.getMine());
 		}
