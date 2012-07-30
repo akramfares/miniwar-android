@@ -1,6 +1,7 @@
 package com.faresgames.miniwar.compte;
 
 import com.actionbarsherlock.R;
+import com.faresgames.miniwar.Player;
 import com.faresgames.miniwar.PlayerMW;
 
 import android.os.Bundle;
@@ -8,12 +9,12 @@ import android.widget.TextView;
 
 public class CompteActivity extends CompteActionItems {
 
-	PlayerMW Player = new PlayerMW(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Player player = new Player(this);
 		super.onCreate(savedInstanceState);
-		Player.Load();
+
 		TextView username, email, country, gold, xp, mine, soldiers, knights, archers, heros;
 		username = (TextView) findViewById(R.id.compte_username);
 		email = (TextView) findViewById(R.id.compte_email);
@@ -25,15 +26,15 @@ public class CompteActivity extends CompteActionItems {
 		knights = (TextView) findViewById(R.id.compte_knights);
 		archers = (TextView) findViewById(R.id.compte_archers);
 		heros = (TextView) findViewById(R.id.compte_heros);
-		username.setText(Player.getUsername());
-		email.setText(Player.getEmail());
-		country.setText(Player.getCountry());
-		gold.setText(Player.getGold() + "");
-		xp.setText(Player.getXp() + "");
-		mine.setText(Player.getMine() + "");
-		soldiers.setText(Player.getSoldier() + "");
-		knights.setText(Player.getKnight() + "");
-		archers.setText(Player.getArcher() + "");
-		heros.setText(Player.getHero() + "");
+		username.setText(player.getUsername());
+		email.setText(player.getEmail());
+		country.setText(player.getCountry());
+		gold.setText(player.getGold() + "");
+		xp.setText(player.getXp() + "");
+		mine.setText(player.getMine() + "");
+		soldiers.setText(player.getSoldier() + "");
+		knights.setText(player.getKnight() + "");
+		archers.setText(player.getArcher() + "");
+		heros.setText(player.getHero() + "");
 	}
 }

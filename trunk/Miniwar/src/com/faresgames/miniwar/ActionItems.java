@@ -18,12 +18,12 @@ package com.faresgames.miniwar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import com.faresgames.miniwar.R;
-import com.faresgames.miniwar.compte.CompteActivity;
+
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.faresgames.miniwar.compte.CompteActivity;
 
 public class ActionItems extends SherlockActivity {
 
