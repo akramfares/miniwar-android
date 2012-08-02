@@ -10,9 +10,9 @@
         android:showAsAction="ifRoom|withText"
         android:title="Save"/>
     <item
-        android:id="@+id/miniwar_refresh"
+        android:id="@+id/miniwar_army"
         android:showAsAction="ifRoom|withText"
-        android:title="Refresh"/>
+        android:title="Army"/>
     <item
         android:id="@+id/miniwar_file"
         android:title="File">
