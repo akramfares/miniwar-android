@@ -16,6 +16,8 @@ import com.facebook.android.Util;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 

@@ -24,6 +24,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.faresgames.miniwar.R;
+import com.faresgames.miniwar.army.ArmyActivity;
 import com.faresgames.miniwar.compte.CompteActivity;
 
 public class DashboardActionItems extends SherlockActivity {
@@ -47,6 +48,10 @@ public class DashboardActionItems extends SherlockActivity {
 		switch (item.getItemId()) {
 		case R.id.miniwar_account:
 			i = new Intent(DashboardActionItems.this, CompteActivity.class);
+			startActivity(i);
+			return true;
+		case R.id.miniwar_army:
+			i = new Intent(DashboardActionItems.this, ArmyActivity.class);
 			startActivity(i);
 			return true;
 

@@ -1,11 +1,10 @@
 package com.faresgames.miniwar.compte;
 
-import com.actionbarsherlock.R;
-import com.faresgames.miniwar.Player;
-import com.faresgames.miniwar.PlayerMW;
-
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.faresgames.miniwar.Player;
+import com.faresgames.miniwar.R;
 
 public class CompteActivity extends CompteActionItems {
 
