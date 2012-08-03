@@ -13,7 +13,7 @@ import android.content.Context;
 public class Mine {
 	public static final int PRODUCTION_INIT = 34;
 	public static final int PRICE_INIT = 72;
-	public static final int TIME_INIT = 10;//94;
+	public static final int TIME_INIT = 94;
 	private static Context c; 
 	
 	public static void init(Context con){
