@@ -32,6 +32,7 @@ public class MiniwarActivity extends ActionItems {
             facebook.setAccessExpires(expires);
         }
         
+        
         if(player.exists()){
         	startActivity(dashboard);
         }
@@ -47,6 +48,11 @@ public class MiniwarActivity extends ActionItems {
                     editor.putString("access_token", facebook.getAccessToken());
                     editor.putLong("access_expires", facebook.getAccessExpires());
                     editor.commit();
+                    
+                    Bundle tokenBundle = new Bundle();
+                    tokenBundle.putString("access_token", facebook.getAccessToken());
+                    tokenBundle.putLong("access_expires", facebook.getAccessExpires());
+                    dashboard.putExtras(tokenBundle);
 					startActivity(dashboard);
                 }
     

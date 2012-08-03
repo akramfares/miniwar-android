@@ -10,15 +10,14 @@ import java.io.InputStreamReader;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.facebook.android.FacebookError;
-import com.facebook.android.Util;
-
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.android.FacebookError;
+import com.facebook.android.Util;
+import com.faresgames.miniwar.dashboard.Mine;
 
 
 public class Player extends Activity{
@@ -177,6 +176,9 @@ public class Player extends Activity{
 	public void setMine(int mine) {
 		this.mine = mine;
 		register();
+	}
+	public void upgradeMine() {
+		this.setMine(mine+1);
 	}
 	public void setSoldier(int soldier) {
 		this.soldier = soldier;
