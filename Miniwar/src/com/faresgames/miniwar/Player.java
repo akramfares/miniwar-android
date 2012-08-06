@@ -17,26 +17,25 @@ import android.widget.Toast;
 
 import com.facebook.android.FacebookError;
 import com.facebook.android.Util;
-import com.faresgames.miniwar.dashboard.Mine;
 
 
 public class Player extends Activity{
 	private String player_file;
-	private int id;
-	private String username;
-	private String email;
-	private String access;
-	private String country;
-	private String uid;
-	private String timestamp;
-	private int gold;
-	private int xp;
-	private int mine;
-	private int soldier;
-	private int knight;
-	private int archer;
-	private int hero;
-	private Context c;
+	private static int id;
+	private static String username;
+	private static String email;
+	private static String access;
+	private static String country;
+	private static String uid;
+	private static String timestamp;
+	private static int gold;
+	private static int xp;
+	private static int mine;
+	private static int soldier;
+	private static int knight;
+	private static int archer;
+	private static int hero;
+	private static Context c;
 	
 	public Player(Context context){
 		c = context;
@@ -142,78 +141,78 @@ public class Player extends Activity{
 	}
 	
 	public void setId(int id) {
-		this.id = id;
+		Player.id = id;
 		register();
 	}
 	public void setUsername(String username) {
-		this.username = username;
+		Player.username = username;
 		register();
 	}
 	public void setEmail(String email) {
-		this.email = email;
+		Player.email = email;
 		register();
 	}
 	public void setAccess(String access) {
-		this.access = access;
+		Player.access = access;
 		register();
 	}
 	public void setCountry(String country) {
-		this.country = country;
+		Player.country = country;
 		register();
 	}
 	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
+		Player.timestamp = timestamp;
 		register();
 	}
 	public void setGold(int gold) {
-		this.gold = gold;
+		Player.gold = gold;
 		register();
 	}
 	public void setXp(int xp) {
-		this.xp = xp;
+		Player.xp = xp;
 		register();
 	}
 	public void setMine(int mine) {
-		this.mine = mine;
+		Player.mine = mine;
 		register();
 	}
 	public void upgradeMine() {
 		this.setMine(mine+1);
 	}
 	public void setSoldier(int soldier) {
-		this.soldier = soldier;
+		Player.soldier = soldier;
 		register();
 	}
 	public void setKnight(int knight) {
-		this.knight = knight;
+		Player.knight = knight;
 		register();
 	}
 	public void setArcher(int archer) {
-		this.archer = archer;
+		Player.archer = archer;
 		register();
 	}
 	public void setHero(int hero) {
-		this.hero = hero;
+		Player.hero = hero;
 		register();
 	}
 	public void setUid(String uid) {
-		this.uid = uid;
+		Player.uid = uid;
 		register();
 	}
 	public void setPlayer_file(String player_file) {
 		this.player_file = player_file;
 	}
 	
-	private void writeFile(String file, String text){
+	private static void writeFile(String file, String text){
 		FileOutputStream fos;
 		try {
 			fos = c.openFileOutput(file, Context.MODE_PRIVATE);
 			fos.write(text.getBytes());
         	fos.close();
 		} catch (FileNotFoundException e) {
-			Toast.makeText(this, "ERROR: can't open file", Toast.LENGTH_SHORT).show();
+			Toast.makeText(c, "ERROR: can't open file", Toast.LENGTH_SHORT).show();
 		} catch (IOException e) {
-			Toast.makeText(this, "ERROR: can't write file", Toast.LENGTH_SHORT).show();
+			Toast.makeText(c, "ERROR: can't write file", Toast.LENGTH_SHORT).show();
 		}	
 	}
 	private String readFile(String file) {
