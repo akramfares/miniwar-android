@@ -71,11 +71,12 @@ public class DashboardActivity extends DashboardActionItems {
 	 
 	        Intent intent = new Intent(this, ServiceTemplate.class);
 	        PendingIntent sender = PendingIntent.getBroadcast(this, 0 , intent, 0);
-	        
-	        long firstTime = SystemClock.elapsedRealtime();
-	        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
-	        am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, firstTime, 60*60*1000, sender);
-		
+	        boolean alarmUp = (PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_NO_CREATE) == null);
+	        if(alarmUp){
+		        long firstTime = SystemClock.elapsedRealtime();
+		        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+		        am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, firstTime, 60*60*1000, sender);
+	        }
 		 
 	        timeTicker.scheduleAtFixedRate(tick, 0, 100);
 		 
@@ -138,7 +139,7 @@ public class DashboardActivity extends DashboardActionItems {
         }
         
         if(player.exists()){
-				super.setTitle("Welcome, "+ player.getUsername());
+				
 				TextView MineLevel = (TextView)findViewById(R.id.MineLevel);
 				MineLevel.setText("Level "+player.getMine());
 				TextView MineProduction = (TextView)findViewById(R.id.MineProduction);
@@ -227,8 +228,7 @@ public class DashboardActivity extends DashboardActionItems {
         }
 
 		private void updateGold() {
-			player = new Player(DashboardActivity.this);
-			setTitle(player.getGold()+"Gold");
+			invalidateOptionsMenu();
 		}
     };
 	
