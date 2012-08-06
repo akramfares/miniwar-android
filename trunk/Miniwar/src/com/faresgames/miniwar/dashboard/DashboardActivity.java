@@ -3,6 +3,7 @@ package com.faresgames.miniwar.dashboard;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,10 +11,14 @@ import java.util.TimerTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
 import android.text.Html;
@@ -29,6 +34,7 @@ import com.facebook.android.Facebook;
 import com.facebook.android.Util;
 import com.faresgames.miniwar.Player;
 import com.faresgames.miniwar.R;
+import com.faresgames.miniwar.ServiceTemplate;
 
 public class DashboardActivity extends DashboardActionItems {
 	Facebook facebook = new Facebook("121460807998402");
@@ -40,14 +46,38 @@ public class DashboardActivity extends DashboardActionItems {
     private MyTimerTask tick = new MyTimerTask();
     private int mineCount;
     private int now;
+    private Button MineUpgrade ;
+    private boolean isMineUpgrade = false;
     
 	@Override
 	public void setContent(TextView view) {
 		 player = new Player(this);
 		 Mine.init(this);
+		 
+		 /* Elements of UI */
+		 MineUpgrade = (Button)findViewById(R.id.MineUpgrade);
+		 
 		 now = (int) (System.currentTimeMillis()/1000);
-		 if((mineCount = Mine.getUpgradeTime() - now) > 0)
-			timeTicker.scheduleAtFixedRate(tick, 0, 100);
+		 
+		 if((mineCount = Mine.getUpgradeTime() - now) > 0){
+			 isMineUpgrade = true;
+			 MineUpgrade.setVisibility(Button.INVISIBLE);
+		 }
+		 
+		 
+		//Create an offset from the current time in which the alarm will go off.
+	        Calendar cal = Calendar.getInstance();
+	        cal.add(Calendar.SECOND, 5);
+	 
+	        Intent intent = new Intent(this, ServiceTemplate.class);
+	        PendingIntent sender = PendingIntent.getBroadcast(this, 0 , intent, 0);
+	        
+	        long firstTime = SystemClock.elapsedRealtime();
+	        AlarmManager am = (AlarmManager)getSystemService(ALARM_SERVICE);
+	        am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, firstTime, 60*60*1000, sender);
+		
+		 
+	        timeTicker.scheduleAtFixedRate(tick, 0, 100);
 		 
         /*
          * Get existing access_token if any
@@ -130,6 +160,7 @@ public class DashboardActivity extends DashboardActionItems {
 			@Override
 			public void onClick(View v) {
 				dialog.show();
+				dialog.setTitle("Upgrade Mine");
 				/* Current Level */
 		        TextView MineCurrentLevel = (TextView) dialog.findViewById(R.id.MineCurrentLevel);
 		        MineCurrentLevel.setText(Html.fromHtml("Level "+player.getMine()+"<br/><small><font color=\"red\">(Current)</font></small>"));
@@ -159,13 +190,12 @@ public class DashboardActivity extends DashboardActionItems {
 					public void onClick(View arg0) {
 						player.setGold(player.getGold() - Mine.getPrice(player.getMine()+1));
 						Mine.setUpgrade(player.getMine()+1);
-						timeTicker= new Timer("Ticker");
-						tick = new MyTimerTask();
-						timeTicker.scheduleAtFixedRate(tick, 0, 100);
+						isMineUpgrade = true;
 						now = (int) (System.currentTimeMillis()/1000);
 						mineCount = Mine.getUpgradeTime() - now;
 						dialog.dismiss();
 						Toast.makeText(DashboardActivity.this, "Mine under construction...", Toast.LENGTH_LONG).show();
+						MineUpgrade.setVisibility(Button.INVISIBLE);
 					}
 		        	
 		        });
@@ -192,20 +222,27 @@ public class DashboardActivity extends DashboardActionItems {
 
     private Runnable doUpdateTimeout = new Runnable() {
         public void run() {
-            updateTimeout();
+            updateMineUpgrade();
+            updateGold();
         }
+
+		private void updateGold() {
+			player = new Player(DashboardActivity.this);
+			setTitle(player.getGold()+"Gold");
+		}
     };
 	
+	
 
-    private void updateTimeout() {
+    private void updateMineUpgrade() {
         timeTickDown = 10; // 10* 100ms == once a second
         TextView MineLevel = (TextView)findViewById(R.id.MineLevel);
-        Button MineUpgrade = (Button)findViewById(R.id.MineUpgrade);
-        if(mineCount-->0){
+        
+        
+        if(mineCount-->0 && isMineUpgrade){
         	MineLevel.setText(SecToString(mineCount));
-        	MineUpgrade.setVisibility(Button.INVISIBLE);
         }
-        else {
+        if(mineCount<=0 && isMineUpgrade) {
         	// Delete the upgrading time
         	Mine.finishUpgrade();
         	// Upgrade the mine
@@ -214,9 +251,8 @@ public class DashboardActivity extends DashboardActionItems {
         	MineLevel.setText("Level "+ player.getMine());
         	// Set the button visible
         	MineUpgrade.setVisibility(Button.VISIBLE);
-        	// Cancel the runnable
-        	tick.cancel();
-        	timeTicker.cancel();
+        	// Finish the Upgrade timer
+        	isMineUpgrade = false;
         	// Update the Production of the mine
         	TextView MineProduction = (TextView)findViewById(R.id.MineProduction);
         	MineProduction.setText(""+Mine.getProduction(player.getMine())+" Gold/Hour");
