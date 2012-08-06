@@ -133,6 +133,10 @@ public class Player extends Activity{
 	public int getHero() {
 		return hero;
 	}
+	public int getPop() {
+		int pop = soldier + knight + archer + hero;
+		return pop;
+	}
 	public String getUid() {
 		return uid;
 	}
@@ -234,6 +238,7 @@ public class Player extends Activity{
 			return "0";
 		}
 	}
+	
 	
 	
 }
