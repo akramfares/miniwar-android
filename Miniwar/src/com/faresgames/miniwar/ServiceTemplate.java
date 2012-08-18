@@ -17,6 +17,8 @@ public class ServiceTemplate extends BroadcastReceiver {
 		player.setGold(player.getGold()+production );
 
 		Log.e("UPDATE GOLD", "updated : "+ player.getGold());
+		Notification notification = new Notification(context);
+		notification.addNotification(new Notification("gold_add", "+"+production+" Gold"));
 	}
 	
 }
