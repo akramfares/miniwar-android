@@ -26,12 +26,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.android.Facebook;
 import com.facebook.android.Util;
+import com.faresgames.miniwar.Notification;
+import com.faresgames.miniwar.NotificationAdapter;
 import com.faresgames.miniwar.Player;
 import com.faresgames.miniwar.R;
 import com.faresgames.miniwar.ServiceTemplate;
@@ -48,11 +52,15 @@ public class DashboardActivity extends DashboardActionItems {
     private int now;
     private Button MineUpgrade ;
     private boolean isMineUpgrade = false;
+	private Notification notification;
+	private ListView lv;
     
 	@Override
 	public void setContent(TextView view) {
 		 player = new Player(this);
 		 Mine.init(this);
+		 setupNotification();
+		 notification = new Notification(this);
 		 
 		 /* Elements of UI */
 		 MineUpgrade = (Button)findViewById(R.id.MineUpgrade);
@@ -154,6 +162,14 @@ public class DashboardActivity extends DashboardActionItems {
         }
     }
 
+	private void setupNotification() {
+		notification = new Notification(this);
+		lv = (ListView)findViewById(R.id.listview);
+		NotificationAdapter adapter = new NotificationAdapter(this, notification.getAll());
+		lv.setAdapter(adapter);
+		
+	}
+
 	private void setupUpgradeMine() {
 		Button button = (Button) findViewById(R.id.MineUpgrade);
         button.setOnClickListener(new OnClickListener() {
@@ -242,6 +258,7 @@ public class DashboardActivity extends DashboardActionItems {
         if(mineCount-->0 && isMineUpgrade){
         	MineLevel.setText(SecToString(mineCount));
         }
+        // Mine Finished Upgrading
         if(mineCount<=0 && isMineUpgrade) {
         	// Delete the upgrading time
         	Mine.finishUpgrade();
@@ -256,6 +273,9 @@ public class DashboardActivity extends DashboardActionItems {
         	// Update the Production of the mine
         	TextView MineProduction = (TextView)findViewById(R.id.MineProduction);
         	MineProduction.setText(""+Mine.getProduction(player.getMine())+" Gold/Hour");
+        	// Add notification
+        	notification.addNotification(new Notification("gold_up", "Mine upgraded to Level "+player.getMine()));
+        	((BaseAdapter)lv.getAdapter()).notifyDataSetChanged();
         }
     }
     
