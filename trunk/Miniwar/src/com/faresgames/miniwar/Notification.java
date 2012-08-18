@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,6 +63,7 @@ public class Notification {
 					read = data.getBoolean("read");
 					notifications.add(new Notification(type, message, date, read));
 				}
+				Collections.reverse(notifications);
 			} catch (JSONException e) {
 				Log.e("Notification JSON", e.toString());
 			}
@@ -83,7 +85,9 @@ public class Notification {
 			notification_data.put("read", n.isRead());
 			jArray.put(notification_data);
 			// Add the notification to the ArrayList
+			Collections.reverse(notifications);
 			notifications.add(n);
+			Collections.reverse(notifications);
 			// Save the new notification to the file
 			writeFile("mw_notification", jArray.toString());
 			Log.e("CONTENT NOTIFICATION", jArray.toString());
